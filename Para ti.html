@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para Ti</title>
+  <style>
+body {
+  height: 100vh;
+  width: 100vw;
+  background: #080f1a;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  transform-origin: center;
+}
+
+/* Responsive adjustments for mobile */
+@media (max-width: 768px) {
+  .container {
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  
+  .romantic-text {
+    font-size: 1.2rem;
+    margin-top: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    transform: translate(-50%, -50%) scale(0.6);
+  }
+  
+  .romantic-text {
+    font-size: 1rem;
+    margin-top: 20px;
+    padding: 0 10px;
+  }
+}
+
+@media (max-width: 360px) {
+  .container {
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+  
+  .romantic-text {
+    font-size: 0.9rem;
+    margin-top: 15px;
+    padding: 0 5px;
+  }
+}
+
+.glass {
+  height: 350px;
+  width: 200px;
+  background: #122139;
+  border-radius: 300px 300px 0px 0px;
+}
+.glass:before {
+  content: "";
+  height: 10px;
+  width: 10px;
+  transform-origin: center;
+  border: 10px solid #122139;
+  border-radius: 100%;
+  position: absolute;
+  left: 87px;
+  top: -25px;
+}
+.glass:after {
+  content: "";
+  position: absolute;
+  height: 15px;
+  width: 250px;
+  background: #a52a2a;
+  top: 100%;
+  left: -13%;
+}
+
+.shine {
+  width: 12px;
+  height: 140px;
+  background: white;
+  opacity: 0.2;
+  position: absolute;
+  left: 85%;
+  top: 80px;
+  border-radius: 100px;
+  z-index: 10;
+}
+.shine:before {
+  content: "";
+  width: 12px;
+  height: 20px;
+  position: absolute;
+  background: white;
+  top: 160px;
+  border-radius: 100px;
+}
+
+.petals > div {
+  position: absolute;
+  background: #d52d58;
+  width: 45px;
+  height: 80px;
+  top: 55px;
+  transition: all 0.5s ease-out;
+}
+.petals > div:nth-child(1) {
+  border-radius: 15px;
+  box-shadow: 0px 0px 30px #f594b8;
+  left: 80px;
+  top: 60px;
+  background: #d52d58;
+}
+.petals > div:nth-child(2), .petals > div:nth-child(4), .petals > div:nth-child(6) {
+  background: #b81b43;
+  left: 60px;
+  border-radius: 0px 30px 0px 30px;
+  transform-origin: bottom right;
+}
+.petals > div:nth-child(3), .petals > div:nth-child(5), .petals > div:nth-child(7) {
+  background: #b81b43;
+  left: 100px;
+  border-radius: 30px 0px 30px 0px;
+  transform-origin: bottom left;
+}
+.petals > div:nth-child(2) {
+  z-index: 5;
+  background: #ab1a3f;
+  top: 75px;
+  height: 70px;
+  box-shadow: 0px 0px 50px rgba(245, 148, 184, 0.5);
+  animation: bloom2 3s ease-in-out;
+  animation-fill-mode: forwards;
+}
+.petals > div:nth-child(3) {
+  z-index: 4;
+  background: #ab1a3f;
+  top: 75px;
+  height: 70px;
+  box-shadow: 0px 0px 50px rgba(245, 148, 184, 0.5);
+  animation: bloom3 3s ease-in-out, glowing 2.5s ease-in-out infinite;
+  animation-fill-mode: forwards;
+}
+.petals > div:nth-child(4) {
+  z-index: 3;
+  background: #b81b43;
+  top: 70px;
+  height: 75px;
+  box-shadow: 0px 0px 50px rgba(245, 148, 184, 0.5);
+  animation: bloom4 3s ease-in-out, glowing 2.5s ease-in-out infinite;
+  animation-fill-mode: forwards;
+}
+.petals > div:nth-child(5) {
+  z-index: 2;
+  background: #b81b43;
+  top: 70px;
+  height: 75px;
+  box-shadow: 0px 0px 50px rgba(245, 148, 184, 0.5);
+  animation: bloom5 3s ease-in-out, glowing 2.5s ease-in-out infinite;
+  animation-fill-mode: forwards;
+}
+.petals > div:nth-child(6) {
+  z-index: 1;
+  background: #c9204b;
+  top: 65px;
+  height: 70px;
+  box-shadow: 0px 0px 50px rgba(245, 148, 184, 0.3);
+  animation: bloom6 3s ease-in-out, glowing 2.5s ease-in-out infinite;
+  animation-fill-mode: forwards;
+}
+.petals > div:nth-child(7) {
+  z-index: 0;
+  background: #c9204b;
+  top: 65px;
+  height: 70px;
+  box-shadow: 0px 0px 50px rgba(245, 148, 184, 0.3);
+  animation: bloom7 3s ease-in-out, glowing 2.5s ease-in-out infinite;
+  animation-fill-mode: forwards;
+}
+
+.deadPetals > div {
+  position: absolute;
+  background: #d52d58;
+  width: 20px;
+  height: 15px;
+  top: 120px;
+  border-radius: 0px 30px 0px 30px;
+  box-shadow: 0px 0px 30px rgba(245, 148, 184, 0.5);
+  transition: all 0.5s ease-out;
+}
+.deadPetals > div:nth-child(1) {
+  left: 67px;
+  transform: rotate(-30deg);
+  animation: falling 20s 4s ease-in-out infinite;
+}
+.deadPetals > div:nth-child(2) {
+  left: 104px;
+  transform: rotate(-30deg);
+  animation: falling 20s 8s ease-in-out infinite;
+}
+.deadPetals > div:nth-child(3) {
+  left: 91px;
+  transform: rotate(-30deg);
+  animation: falling 20s 12s ease-in-out infinite;
+}
+.deadPetals > div:nth-child(4) {
+  left: 69px;
+  transform: rotate(-30deg);
+  animation: falling 20s 16s ease-in-out infinite;
+}
+
+.leaves > div:nth-last-child(1) {
+  position: absolute;
+  width: 55px;
+  height: 30px;
+  background: #338f37;
+  top: 120px;
+  left: 75px;
+  border-radius: 100px;
+}
+.leaves > div:nth-child(1) {
+  position: absolute;
+  width: 6px;
+  height: 210px;
+  background: #054c05;
+  top: 95px;
+  left: 100px;
+  border-radius: 0 0 100px 100px;
+}
+.leaves > div:nth-child(2) {
+  position: absolute;
+  width: 30px;
+  height: 50px;
+  top: 53px;
+  border-radius: 5px 40px 20px 40px;
+  background: #054c05;
+  transform-origin: bottom;
+  transform: rotate(-30deg);
+  top: 180px;
+  left: 80px;
+  box-shadow: inset 5px 5px #066406;
+}
+.leaves > div:nth-child(3) {
+  position: absolute;
+  width: 30px;
+  height: 50px;
+  top: 53px;
+  border-radius: 40px 5px 40px 20px;
+  background: #054c05;
+  transform-origin: bottom;
+  transform: rotate(30deg);
+  top: 150px;
+  left: 95px;
+  box-shadow: inset -5px 5px #066406;
+}
+
+.thorns > div {
+  position: absolute;
+  width: 0;
+  height: 0;
+  top: 140px;
+}
+.thorns > div:nth-child(odd) {
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-left: 5px solid #054c05;
+  left: 105px;
+}
+.thorns > div:nth-child(even) {
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  border-right: 5px solid #054c05;
+  left: 95px;
+}
+.thorns > div:nth-child(1) {
+  top: 200px;
+}
+.thorns > div:nth-child(2) {
+  top: 170px;
+}
+.thorns > div:nth-child(4) {
+  top: 230px;
+}
+
+@keyframes bloom2 {
+  50% {
+    transform: rotate(-90deg);
+    top: 200px;
+    left: 100px;
+  }
+  100% {
+    transform: rotate(-60deg);
+    top: 252px;
+    left: 50px;
+    background: #71122a;
+    box-shadow: 0px 0px 0px rgba(245, 148, 184, 0);
+  }
+}
+@keyframes bloom3 {
+  100% {
+    transform: rotate(45deg);
+  }
+}
+@keyframes bloom4 {
+  100% {
+    transform: rotate(-20deg);
+  }
+}
+@keyframes bloom5 {
+  100% {
+    transform: rotate(20deg);
+  }
+}
+@keyframes bloom6 {
+  100% {
+    transform: rotate(-5deg);
+  }
+}
+@keyframes bloom7 {
+  100% {
+    transform: rotate(5deg);
+  }
+}
+@keyframes glowing {
+  50% {
+    background: #d7365f;
+    box-shadow: 0px 0px 60px #f594b8;
+  }
+}
+@keyframes falling {
+  20% {
+    top: 335px;
+    background: #9d193b;
+    box-shadow: 0px 0px 0px rgba(245, 148, 184, 0);
+  }
+  100% {
+    top: 335px;
+    opacity: 0;
+  }
+}
+
+/* Texto Romántico */
+.romantic-text {
+  text-align: center;
+  color: #ffd700;
+  font-family: 'Georgia', serif;
+  font-size: 1.5rem;
+  margin-top: 50px;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5),
+               0 0 20px rgba(255, 215, 0, 0.3),
+               2px 2px 4px rgba(0, 0, 0, 0.8);
+  animation: fadeIn 2s ease-in;
+}
+
+/* Luciérnagas Mágicas */
+.fireflies {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.firefly {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: #ffeb3b;
+  border-radius: 50%;
+  box-shadow: 0 0 6px #ffeb3b,
+              0 0 12px #ffeb3b,
+              0 0 18px #ffeb3b;
+}
+
+.firefly:nth-child(1) {
+  left: 10%;
+  bottom: 20%;
+  animation: floatUp 6s ease-in-out infinite;
+  animation-delay: 0s;
+}
+
+.firefly:nth-child(2) {
+  left: 20%;
+  bottom: 40%;
+  animation: floatUp 8s ease-in-out infinite;
+  animation-delay: 1s;
+}
+
+.firefly:nth-child(3) {
+  left: 30%;
+  bottom: 10%;
+  animation: floatUp 5s ease-in-out infinite;
+  animation-delay: 2s;
+}
+
+.firefly:nth-child(4) {
+  left: 40%;
+  bottom: 30%;
+  animation: floatUp 7s ease-in-out infinite;
+  animation-delay: 0.5s;
+}
+
+.firefly:nth-child(5) {
+  left: 50%;
+  bottom: 50%;
+  animation: floatUp 9s ease-in-out infinite;
+  animation-delay: 1.5s;
+}
+
+.firefly:nth-child(6) {
+  left: 60%;
+  bottom: 15%;
+  animation: floatUp 6s ease-in-out infinite;
+  animation-delay: 3s;
+}
+
+.firefly:nth-child(7) {
+  left: 70%;
+  bottom: 35%;
+  animation: floatUp 8s ease-in-out infinite;
+  animation-delay: 2.5s;
+}
+
+.firefly:nth-child(8) {
+  left: 80%;
+  bottom: 25%;
+  animation: floatUp 5s ease-in-out infinite;
+  animation-delay: 4s;
+}
+
+.firefly:nth-child(9) {
+  left: 85%;
+  bottom: 45%;
+  animation: floatUp 7s ease-in-out infinite;
+  animation-delay: 0.8s;
+}
+
+.firefly:nth-child(10) {
+  left: 15%;
+  bottom: 60%;
+  animation: floatUp 6s ease-in-out infinite;
+  animation-delay: 3.5s;
+}
+
+.firefly:nth-child(11) {
+  left: 25%;
+  bottom: 55%;
+  animation: floatUp 8s ease-in-out infinite;
+  animation-delay: 1.8s;
+}
+
+.firefly:nth-child(12) {
+  left: 35%;
+  bottom: 65%;
+  animation: floatUp 5s ease-in-out infinite;
+  animation-delay: 2.8s;
+}
+
+.firefly:nth-child(13) {
+  left: 45%;
+  bottom: 70%;
+  animation: floatUp 7s ease-in-out infinite;
+  animation-delay: 4.5s;
+}
+
+.firefly:nth-child(14) {
+  left: 55%;
+  bottom: 75%;
+  animation: floatUp 6s ease-in-out infinite;
+  animation-delay: 0.3s;
+}
+
+.firefly:nth-child(15) {
+  left: 65%;
+  bottom: 80%;
+  animation: floatUp 9s ease-in-out infinite;
+  animation-delay: 3.8s;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-100px) translateX(20px);
+    opacity: 0.8;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-200px) translateX(-10px);
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+  </style>
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div class="fireflies">
+  <div class="firefly"></div>
+  <div class="firefly"></div>
+  <div class="firefly"></div>
+  <div class="firefly"></div>
+  <div class="firefly"></div>
+  <div class="firefly"></div>
+  <div class="firefly"></div>
+  <div class="firefly"></div>
+  <div class="firefly"></div>
+  <div class="firefly"></div>
+  <div class="firefly"></div>
+  <div class="firefly"></div>
+  <div class="firefly"></div>
+  <div class="firefly"></div>
+</div>
+<div class="container">
+	<div class="glass">
+    <div class="shine"></div>
+  </div>
+	<div class="thorns">
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+	</div>
+	<div class="leaves">
+		<div></div>
+		<div></div>
+    <div></div>
+    <div></div>
+	</div>
+	<div class="petals">
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+		<div></div>
+	</div>
+  <div class="deadPetals">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+  </div>
+</div>
+<p class="romantic-text">Mi amor por ti durará hasta que caiga el último pétalo ❤️</p>
+<!-- partial -->
+  
+</body>
+</html>
